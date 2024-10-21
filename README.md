@@ -83,3 +83,81 @@ SELECT Order_Status,
    ROUND(SUM(Total_Price)+SUM(Add_on_Total),0) AS Gross_Sales
 FROM projects.electronic_sales
 GROUP BY Order_Status
+~~~
+6. Show monthly sales split by main product and add-on product, and month-on-month growth.
+~~~
+WITH Sales_CTE AS (
+    SELECT 
+        YEAR(Purchase_Date) AS Sales_Year, 
+        MONTH(Purchase_Date) AS Sales_Month, 
+        COUNT(*) AS Sales_Count, 
+        ROUND(SUM(Total_Price), 0) AS Sales_Total, 
+        ROUND(SUM(Add_on_Total), 0) AS Add_On_Total, 
+        ROUND(SUM(Total_Price + Add_on_Total), 0) AS Gross_Sales
+    FROM projects.electronic_sales
+    WHERE Order_Status = "Completed"
+    GROUP BY YEAR(Purchase_Date), MONTH(Purchase_Date)
+)
+SELECT 
+    Sales_Year, 
+    Sales_Month, 
+    Sales_Count, 
+    Sales_Total, 
+    Add_On_Total, 
+    Gross_Sales, 
+    ROUND(
+        (Gross_Sales - LAG(Gross_Sales, 1) OVER (ORDER BY Sales_Year, Sales_Month)) / 
+        LAG(Gross_Sales, 1) OVER (ORDER BY Sales_Year, Sales_Month) * 100, 2
+    ) AS MoM_Growth
+FROM Sales_CTE
+ORDER BY Sales_Year, Sales_Month;
+~~~
+7. Show average customer rating for each SKU with corresponding sales order count and quantity.
+~~~
+SELECT SKU,
+   ROUND(AVG(Rating),2) AS Average_Rating,
+   SUM(Quantity) AS Total_Quantity,
+   COUNT(*) AS Order_Count
+FROM projects.electronic_sales
+WHERE Order_Status = "Completed"
+GROUP BY SKU
+ORDER BY AVG(Rating) DESC
+~~~
+8. Show the SKU that is sold with the most add-on.
+~~~
+SELECT SKU,
+    ROUND(SUM(Add_on_Total),0) AS Total_Add_On
+FROM projects.electronic_sales
+WHERE Order_Status = "Completed"
+GROUP BY SKU
+ORDER BY ROUND(SUM(Add_on_Total),0) DESC
+~~~
+9. Show SKU sold per age groups.
+~~~
+SELECT SKU,
+   COUNT(CASE WHEN Age BETWEEN 10 AND 19 THEN 1 ELSE NULL END) AS "10-19",
+   COUNT(CASE WHEN Age BETWEEN 20 AND 29 THEN 1 ELSE NULL END) AS "20-29",
+   COUNT(CASE WHEN Age BETWEEN 30 AND 39 THEN 1 ELSE NULL END) AS "30-39",
+   COUNT(CASE WHEN Age BETWEEN 40 AND 49 THEN 1 ELSE NULL END) AS "40-49",
+   COUNT(CASE WHEN Age BETWEEN 50 AND 59 THEN 1 ELSE NULL END) AS "50-59",
+   COUNT(CASE WHEN Age BETWEEN 60 AND 69 THEN 1 ELSE NULL END) AS "60-69",
+   COUNT(CASE WHEN Age BETWEEN 70 AND 79 THEN 1 ELSE NULL END) AS "70-79",
+   COUNT(CASE WHEN Age BETWEEN 80 AND 89 THEN 1 ELSE NULL END) AS "80-89"
+FROM projects.electronic_sales
+WHERE Order_Status = "Completed"
+GROUP BY SKU;
+~~~
+10. Show SKU sold by gender.
+~~~
+SELECT SKU,
+   COUNT(CASE WHEN Gender = "Male" THEN 1 ELSE NULL END) AS "Male",
+   COUNT(CASE WHEN Gender = "Female" THEN 1 ELSE NULL END) AS "Female"
+FROM projects.electronic_sales
+WHERE Order_Status = "Completed"
+GROUP BY SKU;
+~~~
+
+### Data Analysis Using Tableau
+
+Tableau Dashboard - [Sales Analysis](https://public.tableau.com/shared/NNQ65M4NQ?:display_count=n&:origin=viz_share_link).
+
