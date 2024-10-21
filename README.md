@@ -36,3 +36,50 @@ The electronics company is facing challenges in understanding customer behavior,
    - Sales and marketing teams making informed decisions that result in a 15% increase in customer satisfaction and product alignment with demand.
    - A 25% reduction in manual data extraction efforts, allowing sales analysts to reinvest their time in strategic activities and contribute to a 10% revenue boost through targeted campaigns and improved inventory management.
 
+### Data Analysis Using SQL
+***
+1. Show order count by gender, split by order status.
+~~~
+SELECT Gender,
+   SUM(CASE WHEN Order_Status = 'Completed' THEN 1 ELSE 0 END) AS Completed_Orders,
+   SUM(CASE WHEN Order_Status = 'Cancelled' THEN 1 ELSE 0 END) AS Cancelled_Orders,
+   COUNT(*) AS Total_Orders
+FROM projects.electronic_sales
+GROUP BY Gender;
+~~~
+2. Show order count by payment method, split by order status.
+~~~
+SELECT Payment_Method, 
+   SUM(CASE WHEN Order_Status = 'Completed' THEN 1 ELSE 0 END) AS Completed_Orders,
+   SUM(CASE WHEN Order_Status = 'Cancelled' THEN 1 ELSE 0 END) AS Cancelled_Orders,
+   COUNT(*) AS Total_Orders
+FROM projects.electronic_sales
+GROUP BY Payment_Method;
+~~~
+3. Show order count by shipping type, split by order status.
+~~~
+SELECT Shipping_Type, 
+   SUM(CASE WHEN Order_Status = 'Completed' THEN 1 ELSE 0 END) AS Completed_Orders,
+   SUM(CASE WHEN Order_Status = 'Cancelled' THEN 1 ELSE 0 END) AS Cancelled_Orders,
+   COUNT(*) AS Total_Orders
+FROM projects.electronic_sales
+GROUP BY Shipping_Type;
+~~~
+4. Show order count by customer age.
+~~~
+SELECT Age,
+   SUM(CASE WHEN Order_Status = 'Completed' THEN 1 ELSE 0 END) AS Completed_Orders,
+   SUM(CASE WHEN Order_Status = 'Cancelled' THEN 1 ELSE 0 END) AS Cancelled_Orders, count(*) AS Total_Orders
+FROM projects.electronic_sales
+GROUP BY Age
+ORDER BY Age;
+~~~
+5. Show sales totals split by order status.
+~~~
+SELECT Order_Status,
+   COUNT(*) AS Sales_Count,
+   ROUND(SUM(Total_Price),0) AS Sales_Total,
+   ROUND(SUM(Add_on_Total),0) AS Add_On_Total,
+   ROUND(SUM(Total_Price)+SUM(Add_on_Total),0) AS Gross_Sales
+FROM projects.electronic_sales
+GROUP BY Order_Status
