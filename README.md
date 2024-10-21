@@ -161,3 +161,9 @@ GROUP BY SKU;
 
 Tableau Dashboard - [Sales Analysis](https://public.tableau.com/shared/NNQ65M4NQ?:display_count=n&:origin=viz_share_link).
 
+[![Sales Analysis Dashboard](https://github.com/JasperBagano/Sales_Insights_Data_Analysis_Using_SQL_and_Tableau/blob/e74a506efc734e732508a55d0d41585074310bdc/image_Sales%20Analysis.png)](https://public.tableau.com/views/Electronics_Company_Sales_Insights_Analysis_Using_Tableau/SalesAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
+Tableau Dashboard - [Customer Behavior](https://public.tableau.com/views/Electronics_Company_Sales_Insights_Analysis_Using_Tableau/CustomerBehavior?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link).
+
+[![Customer Behavior Dashboard](https://github.com/JasperBagano/Sales_Insights_Data_Analysis_Using_SQL_and_Tableau/blob/e74a506efc734e732508a55d0d41585074310bdc/image_Customer%20Behavior.png)](https://public.tableau.com/views/Electronics_Company_Sales_Insights_Analysis_Using_Tableau/CustomerBehavior?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link)
+
