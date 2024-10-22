@@ -168,4 +168,4 @@ Tableau Dashboard - [Customer Behavior](https://public.tableau.com/views/Electro
 [![Customer Behavior Dashboard](https://github.com/JasperBagano/Sales_Insights_Data_Analysis_Using_SQL_and_Tableau/blob/e74a506efc734e732508a55d0d41585074310bdc/image_Customer%20Behavior.png)](https://public.tableau.com/views/Electronics_Company_Sales_Insights_Analysis_Using_Tableau/CustomerBehavior?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link)
 
 ### Author
-Let's connect at Linkedin @ [Jasper Bagano](https://www.linkedin.com/in/jasper-bagano/)!
+Let's connect in Linkedin @ [Jasper Bagano](https://www.linkedin.com/in/jasper-bagano/)!
